@@ -1,30 +1,34 @@
-import React from 'react';
+import React, {Component} from 'react';
 
 
 
-const App = () => {
-  const profiles = [
-    { name: "Taro", age: 10 },
-    { name: "Hanako", age: 5 },
-    { name: "NoName" }
-  ];
-  return (
-    <div>
-      {
-        profiles.map((profile, index) => {
-          return <User name={profile.name} age={profile.age} key={index} />
-        })
-      }
-    </div>
-  )
-}
+const App = () => (<Counter></Counter>)
 
-const User = (props) => {
-   return <div>Hi, I am {props.name}, and {props.age} years old! </div> 
+class Counter extends Component{
+  constructor(props){
+    super(props)
+    this.state = {count: 0} //初期化時にcountをキーとして0を値とするobjectがstateに設定される
+  }
+  
+  handlePlusButton = () => {
+    this.setState({count: this.state.count + 1})
+  }
+  
+  handleMinusButton = () => {
+    this.setState({count: this.state.count - 1})
   }
 
- User.defaultProps = {
-  age: 1
+  render(){
+    console.log("render(　･∀･)ﾉ" + this.state.count)
+    return(
+      <React.Fragment>
+        <div>count: {this.state.count} </div>
+        <button onClick={this.handlePlusButton}>+1</button>
+        <button onClick={this.handleMinusButton}>-1</button>
+      </React.Fragment>
+    )
+  }
 }
+
 
 export default App;
